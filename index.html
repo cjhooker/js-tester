@@ -13,8 +13,12 @@
 	<h1>JavaScript Tester</h1>
 	<div id="editor-container">
 		<h2>Enter your code here</h2>
-		<!-- <textarea id="editor"></textarea>-->
-		<div id="editor"></div>
+		<!--[if lt IE 9]>
+			<textarea id="editor" class="textarea-editor"></textarea>
+		<![endif]-->
+		<![if (!IE) | gte IE 9]>
+			<div id="editor" class="ace-editor"></div>
+		<![endif]>
 	</div>
 	
 	<div id="tests-container">
@@ -33,16 +37,34 @@
 		</div>
 	</div>
 	
-	<script src="js/ace-src-min/ace.js" type="text/javascript" charset="utf-8"></script>
-	<script>
-		var editor = ace.edit("editor");
-		editor.setTheme("ace/theme/chrome");
-		editor.getSession().setMode("ace/mode/javascript");
-		editor.getSession().on('change', runTests);
-		editor.setOptions({
-			minLines: 15,
-			maxLines: 100
-		});
-	</script>
+	<!--[if lt IE 9]>
+		<script>
+			var editor = $("#editor");
+						
+			editor.keyup(runTests);
+			
+			function getEditorText() {
+				return editor.val();
+			}
+		</script>
+	<![endif]-->
+	<![if (!IE) | gte IE 9]>
+		<script src="js/ace-src-min/ace.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			var editor = ace.edit("editor");
+			editor.setTheme("ace/theme/chrome");
+			editor.getSession().setMode("ace/mode/javascript");
+			editor.getSession().on('change', runTests);
+			editor.setOptions({
+				minLines: 15,
+				maxLines: 100
+			});
+			
+			function getEditorText() {
+				return editor.getValue();
+			}
+		</script>
+	<![endif]>
+
 </body>
 </html>

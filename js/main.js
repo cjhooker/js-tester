@@ -37,7 +37,7 @@ function populateTypeDropdown(index) {
 // Run all the tests
 function runTests() {
 		// If the code is not valid, set all results to false and don't run the other tests
-		if (tester.isValid(editor.getValue())) {
+		if (tester.isValid(getEditorText())) {
 			setResult($("#is-valid-result"), true);
 		} else {
 			setResult($("#is-valid-result"), false);
@@ -48,7 +48,7 @@ function runTests() {
 		}
 
 		for (i = 0; i < tests.length; i++) {
-			var result = tester[tests[i].method](editor.getValue(), tests[i].argument);
+			var result = tester[tests[i].method](getEditorText(), tests[i].argument);
 			setResult($("#test-result-" + i), result);
 		}
 }

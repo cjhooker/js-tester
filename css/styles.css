@@ -29,11 +29,16 @@ select {
 	float: left;
 }
 
-#editor {
+#editor.ace-editor {
 	width: 95%;
 	border: 1px solid #000000;
 }
 
+#editor.textarea-editor {
+	width: 95%;
+	height: 300px;
+	border: 1px solid #000000;
+}
 
 #tests-container {
 	float: left;
