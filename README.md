@@ -2,9 +2,9 @@
 
 Allows you to test a piece of JavaScript code and determine:
 
-1. Whether a certain language element (e.g. If Statement or For Statement) is used
-2. Whether a certain language element is NOT used anywhere
-3. Whether a certain set of nested language elements are used (e.g. a Call inside an If inside a Try)
+1. Whether a certain language element type (e.g. If Statement or For Statement) is used
+2. Whether a certain language element type is NOT used anywhere
+3. Whether a certain set of nested language element types are used (e.g. a Call Expression inside an If Statement inside a Try Statement)
 
 Open `index.html` to see it in action.
 
