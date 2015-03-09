@@ -50,7 +50,11 @@ select {
 	line-height: 36px;
 }
 
-#new-test-type-multi-container {
+#test-list li {
+	margin-left: -20px;
+}
+
+#new-test-type-multi {
 	display: none;
 }
 
@@ -59,7 +63,7 @@ select {
 	margin-right: 10px;
 }
 
-#new-test-type-multi-container select {
+#new-test-type-multi select {
 	display: block;
 	margin-bottom: 5px;
 }

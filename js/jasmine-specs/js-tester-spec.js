@@ -41,17 +41,17 @@ describe("Tests for JsTester.mustNotUse method", function() {
 		var result = tester.mustNotUse("if (true) {var testVar = 42;}", "ForStatement");
 		expect(result).toBe(true);
 	});	
+	
+	it("throws error when there is a syntax error", function() {
+		var badCode = function() { 
+			var result = tester.mustNotUse("if (true) {var testVar = 42;}}", "ForStatement"); 
+		};
+		expect(badCode).toThrow();
+	});	
 });
 
 describe("Tests for JsTester.mustUseNested method", function() {
 	var tester = new JsTester();
-	
-	it("throws error if types is not an array", function() {
-		var badCode = function() { 
-			var result = tester.mustUseNested("if (true) {var foo = 1;}", "IfStatement");
-		};
-		expect(badCode).toThrow();
-	});
 	
 	it("returns true if type[1] is used inside type[0]", function() {
 		var result = tester.mustUseNested("if (true) {var foo = 1;}", ["IfStatement", "VariableDeclaration"]);
@@ -73,7 +73,7 @@ describe("Tests for JsTester.mustUseNested method", function() {
 		expect(result).toBe(true);
 	});	
 
-	it("returns true if 3 types are nested inside each other, but with intervening types", function() {
+	it("returns true if 3 types are nested inside each other, even with intervening types", function() {
 		var result = tester.mustUseNested("for (i = 0; i < 10; i++) {if (i == 5) { for (j = 0; j < 3; j++) {var foo = 1;}}}", ["ForStatement", "IfStatement", "VariableDeclaration"]);
 		expect(result).toBe(true);
 	});	
@@ -87,6 +87,20 @@ describe("Tests for JsTester.mustUseNested method", function() {
 		var result = tester.mustUseNested("if (foo == 1) {doSomething();} if (foo == 2) {for (var i = 0; i < 10; i++) {doSomething();}}", ["IfStatement", "ForStatement"]);
 		expect(result).toBe(true);
 	});	
+			
+	it("throws error if types is not an array", function() {
+		var badCode = function() { 
+			var result = tester.mustUseNested("if (true) {var foo = 1;}", "IfStatement");
+		};
+		expect(badCode).toThrow();
+	});
+	
+	it("throws error when there is a syntax error", function() {
+		var badCode = function() { 
+			var result = tester.mustUseNested("if (true) {var testVar = 42;}}", ["ForStatement", "IfStatement"]); 
+		};
+		expect(badCode).toThrow();
+	});	
 });
 
 describe("Tests for JsTester.isValid method", function() {
@@ -96,11 +110,6 @@ describe("Tests for JsTester.isValid method", function() {
 		var result = tester.isValid("var testVar = 42;");
 		expect(result).toBe(true);
 	});
-	
-	it("returns false if code is not valid", function() {
-		var result = tester.isValid("if (true) {var testVar = 42;}}");
-		expect(result).toBe(false);
-	});	
 	
 	it("returns false if code is not valid", function() {
 		var result = tester.isValid("if (true) {var testVar = 42;}}");

@@ -11,6 +11,7 @@
 </head>
 <body>
 	<h1>JavaScript Tester</h1>
+	
 	<div id="editor-container">
 		<h2>Enter your code here</h2>
 		<!--[if lt IE 9]>
@@ -29,14 +30,15 @@
 		<h3>Add a new test:</h3>
 		<div id="new-test-container">
 			<select id="new-test-method" onchange="methodSelected();"></select>
-			<select id="new-test-type"></select>
-			<div id="new-test-type-multi-container">
-				<select id="new-test-type-0" class="new-test-type-multi" onchange="newTestMultiSelected(0);"></select>
+			<select id="new-test-type-single"></select>
+			<div id="new-test-type-multi">
+				<select id="new-test-type-0" class="new-test-type-multi" onchange="newTypeMultiSelected(0);"></select>
 			</div>
 			<img class="icon clickable" alt="Add Test" title="Add Test" src="images/add.png" onclick="addTest()" />
 		</div>
 	</div>
 	
+	<!-- Use a textarea for IE 8 (or earlier), use Ace text editor for other browsers -->
 	<!--[if lt IE 9]>
 		<script>
 			var editor = $("#editor");
@@ -48,6 +50,7 @@
 			}
 		</script>
 	<![endif]-->
+	
 	<![if (!IE) | gte IE 9]>
 		<script src="js/ace-src-min/ace.js" type="text/javascript" charset="utf-8"></script>
 		<script>
