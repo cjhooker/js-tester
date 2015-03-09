@@ -66,6 +66,10 @@ function addTest() {
 				arg.push($(this).val());
 			}
 		});
+		if (arg.length == 0) {
+			alert("Please choose at least one type");
+			return;
+		}
 	} else {
 		arg = $("#new-test-type-single").val();
 	}
