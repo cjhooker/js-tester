@@ -87,7 +87,22 @@ describe("Tests for JsTester.mustUseNested method", function() {
 		var result = tester.mustUseNested("if (foo == 1) {doSomething();} if (foo == 2) {for (var i = 0; i < 10; i++) {doSomething();}}", ["IfStatement", "ForStatement"]);
 		expect(result).toBe(true);
 	});	
-			
+
+	it ("returns false if a type is not nested inside itself", function() {
+		var result = tester.mustUseNested("if (foo == 1) {}", ["IfStatement", "IfStatement"]);
+		expect(result).toBe(false);
+	});
+	
+	it ("returns true if a type is  nested inside itself", function() {
+		var result = tester.mustUseNested("if (foo == 1) {if (bar == 2) {doSomething();}}", ["IfStatement", "IfStatement"]);
+		expect(result).toBe(true);
+	});
+	
+	it ("returns true if types are nested inside the conditional of an if statement", function() {
+		var result = tester.mustUseNested("if (getSomething(x < 0 ? 0 : x) == 1) {var x = 2;}", ["IfStatement", "CallExpression", "ConditionalExpression"]);
+		expect(result).toBe(true);
+	});
+	
 	it("throws error if types is not an array", function() {
 		var badCode = function() { 
 			var result = tester.mustUseNested("if (true) {var foo = 1;}", "IfStatement");

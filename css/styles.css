@@ -7,6 +7,8 @@ select {
 }
 
 .icon {
+	position: relative;
+	top: -2px;
 	height: 24px;
 	width: 24px;
 	vertical-align: middle;
@@ -41,6 +43,7 @@ select {
 }
 
 #tests-container {
+	max-width: 49%;
 	float: left;
 	padding-left: 20px;
 }

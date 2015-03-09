@@ -11,11 +11,11 @@ var types = tester.types;
 
 // Initialize the application when the document is ready
 $(document).ready(function() {
-	for (method in methodDisplayNames) {
+	for (var method in methodDisplayNames) {
 		$("#new-test-method").append("<option value='" + method + "'>" + methodDisplayNames[method] + "</option>");
 	}
 
-	for (i in types) {
+	for (var i in types) {
 		$("#new-test-type-single").append("<option>" + types[i] + "</option>");
 	}
 		
@@ -25,31 +25,31 @@ $(document).ready(function() {
 	
 // Run all the tests
 function runTests() {
-		// If the code is not valid, set all results to false and don't run the other tests
-		if (tester.isValid(getEditorText())) {
-			displayResult($("#is-valid-result"), true);
-		} else {
-			displayResult($("#is-valid-result"), false);
-			for (i in tests) {
-				displayResult($("#test-result-" + i), false);
-			}			
-			return;
-		}
+	// If the code is not valid, set all results to false and don't run the other tests
+	if (tester.isValid(getEditorText())) {
+		displayResult($("#is-valid-result"), true);
+	} else {
+		displayResult($("#is-valid-result"), false);
+		for (var i in tests) {
+			displayResult($("#test-result-" + i), false);
+		}			
+		return;
+	}
 
-		for (i = 0; i < tests.length; i++) {
-			var result = tester[tests[i].method](getEditorText(), tests[i].argument);
-			displayResult($("#test-result-" + i), result);
-		}
+	for (var i = 0; i < tests.length; i++) {
+		var result = tester[tests[i].method](getEditorText(), tests[i].argument);
+		displayResult($("#test-result-" + i), result);
+	}
 }
 
 // Based on whether or not the test passed, set the UI for images
 function displayResult(element, passed) {
 	if (passed) {
-		element.attr("src", "images/check.png")
+		element.attr("src", "images/check.png");
 		element.attr("alt", "Test Passed");
 		element.attr("title", "Test Passed");
 	} else {
-		element.attr("src", "images/x.png")
+		element.attr("src", "images/x.png");
 		element.attr("alt", "Test Failed");
 		element.attr("title", "Test Failed");	
 	}
@@ -62,11 +62,10 @@ function addTest() {
 	if ($("#new-test-method").val() == "mustUseNested") {
 		arg = [];
 		$(".new-test-type-multi").each(function() {
-			if ($(this).val() != "") {
+			if ($(this).val() !== "") {
 				arg.push($(this).val());
 			}
 		});
-		//arg = [$("#new-test-type").val()];
 	} else {
 		arg = $("#new-test-type-single").val();
 	}
@@ -93,7 +92,7 @@ function addTypeDropdown(index) {
 // Populate the dropdown list of types with the given index
 function populateTypeMultiDropdown(index) {
 	$("#new-test-type-" + index).append("<option value=''>NONE</option>");
-	for (i in types) {
+	for (var i in types) {
 		$("#new-test-type-" + index).append("<option>" + types[i] + "</option>");
 	}
 }
@@ -120,7 +119,7 @@ function newTypeMultiSelected(index) {
 	// If this is the last one currently displayed and value is something other than blank
 	if (index == $(".new-test-type-multi").length - 1) {
 		var dropdown = $("#new-test-type-" + index);
-		if (dropdown.val() != "") {
+		if (dropdown.val() !== "") {
 			addTypeDropdown(index + 1);
 
 		}
@@ -131,7 +130,7 @@ function newTypeMultiSelected(index) {
 function buildTestList() {
 	var testList = $("#test-list");
 	$(".js-test").remove();
-	for (i in tests) {
+	for (var i in tests) {
 		var li = "<li class='js-test'><img id='test-result-" + i + "' class='test-result icon' src='images/x.png' />" + 
 			methodDisplayNames[tests[i].method] + " " + 
 			tests[i].argument +

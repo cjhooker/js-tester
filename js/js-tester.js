@@ -1,6 +1,8 @@
+// Tests whether a piece of JavaScript codes contains certain functionality or structure
 function JsTester() {
 	var parser = new JsParser();
 	
+	// A list of all the valid types to pass to other methods
 	this.types = parser.types;
 	
 	// Require that the code syntax is valid
@@ -65,14 +67,18 @@ function JsTester() {
 	}
 	
 	// Return list of objects within obj (recursively) that match the given key and value
-	function getObjects(object, key, value) {
+	// Top-level calls to this function will generally NOT include the root element of object as a match,
+	// whereas the recursive calls always do. This is to handle the case of testing for a key/value pair 
+	// that is nested within itself, to make sure we don't get false positives.
+	function getObjects(object, key, value, includeSelf) {
+		if (includeSelf === null) includeSelf = false;
 		var objects = [];
 		for (var i in object) {		
 			if (!object.hasOwnProperty(i)) continue;
 		
 			if (typeof object[i] == 'object') {
-				objects = objects.concat(getObjects(object[i], key, value));
-			} else if (i == key && object[key] == value) {
+				objects = objects.concat(getObjects(object[i], key, value, true));
+			} else if (includeSelf == true && i == key && object[key] == value) {
 				objects.push(object);
 			}
 		}
