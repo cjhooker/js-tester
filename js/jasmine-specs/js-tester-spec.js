@@ -131,3 +131,16 @@ describe("Tests for JsTester.isValid method", function() {
 		expect(result).toBe(false);
 	});	
 });
+
+describe("Tests for README example", function() {
+	var tester = new JsTester();
+
+	it("returns true for all three examples", function() {
+		var myCode = "try {if (a == 1) {doSomething();}} catch (err) {}";
+		var result1 = tester.mustUse(myCode, "IfStatement");  
+		var result2 = tester.mustNotUse(myCode, "ForStatement");
+		var result3 = tester.mustUseNested(myCode, ["TryStatement", "IfStatement", "CallExpression"]);
+		
+		expect(result1 && result2 && result3).toBe(true);
+	});
+});
