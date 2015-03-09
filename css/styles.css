@@ -1,0 +1,60 @@
+body {
+	font-family: "Arial", "Verdana", "sans-serif";
+}
+
+select {
+	height: 24px;
+}
+
+.icon {
+	height: 24px;
+	width: 24px;
+	vertical-align: middle;
+}
+
+.clickable {
+	cursor: pointer;
+}
+
+.test-result {
+	margin-right: 10px
+}
+
+.test-delete {
+	margin-left: 10px;
+}
+
+#editor-container {
+	width: 50%;
+	float: left;
+}
+
+#editor {
+	width: 95%;
+	border: 1px solid #000000;
+}
+
+
+#tests-container {
+	float: left;
+	padding-left: 20px;
+}
+
+#test-list {
+	list-style-type: none;
+	line-height: 36px;
+}
+
+#new-test-type-multi-container {
+	display: none;
+}
+
+#new-test-container > * {
+	float: left;
+	margin-right: 10px;
+}
+
+#new-test-type-multi-container select {
+	display: block;
+	margin-bottom: 5px;
+}
